@@ -9,7 +9,7 @@ const App = () => {
   const handleValue = (value) => {
 
     if(value === "="){
-      calculation(expression)
+      setAnswer(calculation(expression))
     }else if(value === "C"){
       setExpression('')
       setAnswer('')
@@ -19,14 +19,64 @@ const App = () => {
     }
   }
 
-  const calculation = (exp) => {
-    try{
-      let input = eval(exp)
+  const calculation = (expression) => {
+    /*try{
+      let input = exp
       setAnswer(input)
+      console.log(exp)
     }
     catch(e){
       setError('Error')
+    }*/
+
+    const operators = ['+', '-', '*', '/'];
+    let currentNumber = '';
+    let currentOperator = '';
+    const numbers = [];
+
+    for (let i = 0; i < expression.length; i++) {
+        const char = expression[i];
+
+        if (operators.includes(char)) {
+            if (currentNumber !== '') {
+                numbers.push(parseFloat(currentNumber));
+                currentNumber = '';
+            }
+            currentOperator = char;
+        } else if(expression[expression.length-1] === "+" || expression[expression.length-1] === "/" || expression[expression.length-1] === "*" | expression[expression.length-1] === "-"){
+            return setError('Error')
+        } else {
+            currentNumber += char;
+        }
     }
+
+    if (currentNumber !== '') {
+        numbers.push(parseFloat(currentNumber));
+    }
+
+    let result = numbers[0];
+
+    for (let i = 1; i < numbers.length; i++) {
+        const number = numbers[i];
+        switch (currentOperator) {
+            case '+':
+                result += number;
+                break;
+            case '-':
+                result -= number;
+                break;
+            case '*':
+                result *= number;
+                break;
+            case '/':
+                result /= number;
+                break;
+            default: 
+        }
+    }
+
+    return result;
+
   }
 
 
