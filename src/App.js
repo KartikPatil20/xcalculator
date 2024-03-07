@@ -45,6 +45,8 @@ const App = () => {
             currentOperator = char;
         } else if(expression[expression.length-1] === "+" || expression[expression.length-1] === "/" || expression[expression.length-1] === "*" | expression[expression.length-1] === "-"){
             return setError('Error')
+        }else if(expression[0] === "+" || expression[0] === "/" || expression[0] === "-" || expression[0] === "*"){
+          return setError('Error')
         } else {
             currentNumber += char;
         }
