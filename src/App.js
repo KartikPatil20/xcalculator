@@ -9,7 +9,12 @@ const App = () => {
   const handleValue = (value) => {
 
     if(value === "="){
-      setAnswer(calculation(expression))
+      if(expression === ''){
+        setError('Error')
+      }else{
+        setAnswer(calculation(expression))
+      }
+      
     }else if(value === "C"){
       setExpression('')
       setAnswer('')
@@ -87,8 +92,8 @@ const App = () => {
     <div className='App'>
       <div className='sec-a'>
         <h1>React Calculator</h1>
-        <input value={expression} readOnly></input>
-        <h3>{error ? "Error" : answer}</h3>
+        <input type='text' value={expression} readOnly></input>
+        <div className='answer'>{error ? "Error" : answer}</div>
       </div>
       <div className='sec-b' >
         <button onClick={(e) => {

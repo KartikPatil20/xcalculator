@@ -22,3 +22,6 @@ button{
   border: solid black 1px;
   border-radius: 10px;
 }
+.answer{
+  margin: 10px;
+}
